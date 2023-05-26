@@ -45,7 +45,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "YumemiInc\\GoogleIdpLaravel\\Providers\\GoogleIapServiceProvider"
+                "YumemiInc\\GoogleIapLaravel\\Providers\\GoogleIapServiceProvider"
             ]
         }
     },

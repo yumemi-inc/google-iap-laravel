@@ -1,5 +1,8 @@
 # Laravel Authentication for Google IAP
 
+> **Warning**  
+> This is not an official product of YUMEMI Inc.
+
 [![php](https://github.com/yumemi-inc/google-iap-laravel/actions/workflows/php.yml/badge.svg)](https://github.com/yumemi-inc/google-iap-laravel/actions/workflows/php.yml)
 
 Authentication guard on Laravel for verifying requests from Google IAP (Identity-Aware Proxy).

@@ -34,8 +34,12 @@ class GoogleIapGuard extends RequestGuard
             return null;
         }
 
+        if (($googleUser = $this->googleIdTokenVerifier->verify($jwt)) === null) {
+            return null;
+        }
+
         return $this->userProviderAdapter->provide(
-            $this->googleIdTokenVerifier->verify($jwt),
+            $googleUser,
             $this->provider,
         );
     }

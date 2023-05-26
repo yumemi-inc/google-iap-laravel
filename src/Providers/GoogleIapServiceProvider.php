@@ -23,6 +23,7 @@ class GoogleIapServiceProvider extends ServiceProvider
     {
         $this->app->bind(GoogleUserResolver::class, DefaultGoogleUserResolver::class);
         $this->app->bind(GoogleIdTokenVerifier::class);
+        $this->app->bind(GoogleIapGuard::class);
 
         $this->app->resolved(AuthManager::class)
             ? static::extendComponents($this->app->make(AuthManager::class)) // @codeCoverageIgnore
@@ -33,13 +34,12 @@ class GoogleIapServiceProvider extends ServiceProvider
     {
         $auth->extend(
             'google-iap',
-            fn (Container $app, string $name, array $config) => (new GoogleIapGuard(
-                $app->make('request'),
-                $auth->createUserProvider($config['provider'] ?? null),
-                $app->make(GoogleIdTokenVerifier::class),
-                $app->make(GoogleUserResolver::class),
-            ))
-                ->setProvider(Assert::nonNull($auth->createUserProvider($config['provider'] ?? null))),
+            function (Container $app, string $name, array $config) use ($auth) {
+                $guard = $this->app->make(GoogleIapGuard::class);
+                $guard->setProvider(Assert::nonNull($auth->createUserProvider($config['provider'] ?? null)));
+
+                return $guard;
+            },
         );
     }
 }

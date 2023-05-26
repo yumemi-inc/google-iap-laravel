@@ -18,11 +18,10 @@ class GoogleIapGuard extends RequestGuard
 {
     public function __construct(
         Request $request,
-        ?UserProvider $userProvider = null,
         private readonly GoogleIdTokenVerifier $googleIdTokenVerifier = new GoogleIdTokenVerifier(),
         private readonly GoogleUserResolver $userProviderAdapter = new DefaultGoogleUserResolver(),
     ) {
-        parent::__construct(static::callback(...), $request, $userProvider);
+        parent::__construct(static::callback(...), $request);
     }
 
     /**

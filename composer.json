@@ -42,6 +42,13 @@
             "phpstan/extension-installer": true
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YumemiInc\\GoogleIdpLaravel\\Providers\\GoogleIapServiceProvider"
+            ]
+        }
+    },
     "scripts": {
         "analyse": "@php static-analysis-kit analyse",
         "fix": "@php static-analysis-kit fix",

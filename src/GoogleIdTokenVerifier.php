@@ -35,18 +35,18 @@ class GoogleIdTokenVerifier
             return null;
         }
 
-        $googleUser = new Claims($claims);
+        $claims = new Claims($claims);
 
-        if ($this->issuer !== null && $googleUser->iss() !== $this->issuer) {
+        if ($this->issuer !== null && $claims->iss() !== $this->issuer) {
             // Issuer verification failed.
             return null;
         }
 
-        if ($this->audience !== null && $googleUser->aud() !== $this->audience) {
+        if ($this->audience !== null && $claims->aud() !== $this->audience) {
             // Audience verification failed.
             return null;
         }
 
-        return $googleUser;
+        return $claims;
     }
 }

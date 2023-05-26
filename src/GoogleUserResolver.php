@@ -9,5 +9,5 @@ use Illuminate\Contracts\Auth\UserProvider;
 
 interface GoogleUserResolver
 {
-    public function provide(Claims $googleUser, UserProvider $userProvider): ?Authenticatable;
+    public function provide(Claims $claims, UserProvider $userProvider): ?Authenticatable;
 }

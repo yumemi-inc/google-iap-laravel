@@ -27,13 +27,15 @@ Authentication guard on Laravel for verifying requests from Google IAP (Identity
    
    use Illuminate\Contracts\Auth\Authenticatable;
    use Illuminate\Contracts\Auth\UserProvider;
+   use YumemiInc\GoogleIapLaravel\Claims;
+   use YumemiInc\GoogleIapLaravel\GoogleUserResolver;
    
    class AppGoogleUserResolver implements GoogleUserResolver
    {
-       public function provide(GoogleUser $googleUser, UserProvider $userProvider): ?Authenticatable
+       public function provide(Claims $claims, UserProvider $userProvider): ?Authenticatable
        {
            return $userProvider->retrieveByCredentials([
-               'google_user_id' => $googleUser->sub(),
+               'google_user_id' => $claims->sub(),
            ]);
        }
    }
@@ -51,11 +53,14 @@ Authentication guard on Laravel for verifying requests from Google IAP (Identity
    }
    ```
 
-4. Set the Google IAP guard as the default.
+4. Use the guard provided in this package.
    ```php
    <?php // config/auth.php
 
-   'defaults' => [
-       'guard' => 'google',
+   'guards' => [
+       'google-iap' => [
+            'driver' => 'google-iap',
+            'provider' => 'users',
+        ],
    ]
    ```

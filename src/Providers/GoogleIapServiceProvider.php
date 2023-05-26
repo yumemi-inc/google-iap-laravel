@@ -9,6 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 use YumemiInc\GoogleIapLaravel\DefaultGoogleUserResolver;
+use YumemiInc\GoogleIapLaravel\GoogleIdTokenVerifier;
 use YumemiInc\GoogleIapLaravel\GoogleUserResolver;
 use YumemiInc\GoogleIapLaravel\Http\GoogleIapGuard;
 use YumemiInc\GoogleIapLaravel\Internal\Assert;
@@ -21,6 +22,7 @@ class GoogleIapServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(GoogleUserResolver::class, DefaultGoogleUserResolver::class);
+        $this->app->bind(GoogleIdTokenVerifier::class);
 
         $this->app->resolved(AuthManager::class)
             ? static::extendComponents($this->app->make(AuthManager::class)) // @codeCoverageIgnore

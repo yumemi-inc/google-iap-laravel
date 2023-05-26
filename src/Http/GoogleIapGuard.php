@@ -6,7 +6,6 @@ namespace YumemiInc\GoogleIapLaravel\Http;
 
 use Illuminate\Auth\RequestGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
 use YumemiInc\GoogleIapLaravel\Claims;
 use YumemiInc\GoogleIapLaravel\DefaultGoogleUserResolver;

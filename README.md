@@ -35,7 +35,7 @@ Authentication guard on Laravel for verifying requests from Google IAP (Identity
        public function provide(Claims $claims, UserProvider $userProvider): ?Authenticatable
        {
            return $userProvider->retrieveByCredentials([
-               'google_user_id' => $claims->sub(),
+               'google_user_id' => $claims->id(),
            ]);
        }
    }

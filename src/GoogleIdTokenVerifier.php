@@ -22,11 +22,11 @@ class GoogleIdTokenVerifier
     /**
      * Verifies the JWT issued by Google IAP.
      *
-     * @return null|GoogleUser claims in the JWT, or null if the token is invalid or malformed
+     * @return null|Claims claims in the JWT, or null if the token is invalid or malformed
      *
      * @throws MalformedClaimsException
      */
-    public function verify(string $jwt): ?GoogleUser
+    public function verify(string $jwt): ?Claims
     {
         if (!($claims = (new AccessToken())->verify($jwt, [
             'certsLocation' => $this->jwksUrl,
@@ -35,7 +35,7 @@ class GoogleIdTokenVerifier
             return null;
         }
 
-        $googleUser = new GoogleUser($claims);
+        $googleUser = new Claims($claims);
 
         if ($this->issuer !== null && $googleUser->iss() !== $this->issuer) {
             // Issuer verification failed.

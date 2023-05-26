@@ -8,6 +8,7 @@ use Illuminate\Auth\RequestGuard;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\UserProvider;
 use Illuminate\Http\Request;
+use YumemiInc\GoogleIapLaravel\Claims;
 use YumemiInc\GoogleIapLaravel\DefaultGoogleUserResolver;
 use YumemiInc\GoogleIapLaravel\GoogleIdTokenVerifier;
 use YumemiInc\GoogleIapLaravel\GoogleUserResolver;
@@ -34,12 +35,12 @@ class GoogleIapGuard extends RequestGuard
             return null;
         }
 
-        if (($googleUser = $this->googleIdTokenVerifier->verify($jwt)) === null) {
+        if (!($claims = $this->googleIdTokenVerifier->verify($jwt)) instanceof Claims) {
             return null;
         }
 
         return $this->userProviderAdapter->provide(
-            $googleUser,
+            $claims,
             $this->provider,
         );
     }

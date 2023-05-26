@@ -9,7 +9,7 @@ use Illuminate\Contracts\Auth\UserProvider;
 
 class DefaultGoogleUserResolver implements GoogleUserResolver
 {
-    public function provide(GoogleUser $googleUser, UserProvider $userProvider): ?Authenticatable
+    public function provide(Claims $googleUser, UserProvider $userProvider): ?Authenticatable
     {
         return $userProvider->retrieveById($googleUser->sub());
     }

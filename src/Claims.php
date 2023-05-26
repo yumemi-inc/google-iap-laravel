@@ -7,7 +7,7 @@ namespace YumemiInc\GoogleIapLaravel;
 use YumemiInc\GoogleIapLaravel\Internal\Assert;
 use YumemiInc\GoogleIapLaravel\Internal\AssertionException;
 
-class GoogleUser
+class Claims
 {
     /**
      * @var array{

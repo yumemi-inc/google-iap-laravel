@@ -1,0 +1,6 @@
+{
+    "ignore": [
+        "/phpstan.neon",
+        "/rector.php"
+    ]
+}

@@ -1,8 +1,8 @@
-# Laravel Middleware for Google IAP
+# Laravel Authentication for Google IAP
 
 [![php](https://github.com/yumemi-inc/google-iap-laravel/actions/workflows/php.yml/badge.svg)](https://github.com/yumemi-inc/google-iap-laravel/actions/workflows/php.yml)
 
-Laravel middleware for verifying requests from Google IAP (Identity-Aware Proxy).
+Authentication guard on Laravel for verifying requests from Google IAP (Identity-Aware Proxy).
 
 
 ## Prerequisites

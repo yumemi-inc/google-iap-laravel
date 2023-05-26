@@ -1,6 +1,6 @@
 {
     "name": "yumemi-inc/google-iap-laravel",
-    "description": "Laravel middleware for verifying requests from Google IAP (Identity-Aware Proxy).",
+    "description": "Authentication guard on Laravel for verifying requests from Google IAP (Identity-Aware Proxy).",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "dev",

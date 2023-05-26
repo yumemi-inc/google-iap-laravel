@@ -34,7 +34,7 @@ class GoogleIapServiceProvider extends ServiceProvider
     {
         $auth->extend(
             'google-iap',
-            function (Container $app, string $name, array $config) use ($auth) {
+            function (Container $app, string $name, array $config) use ($auth): GoogleIapGuard {
                 $guard = $this->app->make(GoogleIapGuard::class);
                 $guard->setProvider(Assert::nonNull($auth->createUserProvider($config['provider'] ?? null)));
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace YumemiInc\GoogleIapLaravel;
 
 use Google\Auth\AccessToken;
+use Psr\Cache\CacheItemPoolInterface;
 
 class GoogleIdTokenVerifier
 {
@@ -16,6 +17,7 @@ class GoogleIdTokenVerifier
         private readonly string $jwksUrl = AccessToken::IAP_CERT_URL,
         private readonly ?string $issuer = 'https://cloud.google.com/iap',
         private readonly ?string $audience = null,
+        private readonly ?CacheItemPoolInterface $cache = null,
     ) {
     }
 
@@ -28,7 +30,7 @@ class GoogleIdTokenVerifier
      */
     public function verify(string $jwt): ?Claims
     {
-        if (!($claims = (new AccessToken())->verify($jwt, [
+        if (!($claims = (new AccessToken(cache: $this->cache))->verify($jwt, [
             'certsLocation' => $this->jwksUrl,
         ]))) {
             // Invalid or malformed token.

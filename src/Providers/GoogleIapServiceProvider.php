@@ -8,8 +8,6 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
-use Symfony\Component\Clock\NativeClock;
-use YumemiInc\GoogleIapLaravel\Cache\IlluminateCacheItemPool;
 use YumemiInc\GoogleIapLaravel\DefaultGoogleUserResolver;
 use YumemiInc\GoogleIapLaravel\GoogleIdTokenVerifier;
 use YumemiInc\GoogleIapLaravel\GoogleUserResolver;

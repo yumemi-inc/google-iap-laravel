@@ -21,6 +21,7 @@
         "illuminate/support": "^9|^10|^11",
         "kelvinmo/simplejwt": "~0.7.0",
         "psr/clock": "^1.0",
+        "symfony/cache": "^6.2",
         "symfony/clock": "^6.2"
     },
     "require-dev": {

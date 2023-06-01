@@ -130,7 +130,7 @@ class Claims
     public static function trimPrefix(string $prefixed): string
     {
         // If not prefix is detected in the value, remains the value untouched.
-        if (str_contains($prefixed, ':')) {
+        if (!str_contains($prefixed, ':')) {
             return $prefixed;
         }
 

@@ -115,8 +115,27 @@ class Claims
      */
     public function id(): string
     {
+        return self::trimPrefix($this->sub());
+    }
+
+    /**
+     * @param non-empty-string $prefixed
+     *
+     * @return non-empty-string
+     *
+     * @throws MalformedClaimsException
+     *
+     * @internal
+     */
+    public static function trimPrefix(string $prefixed): string
+    {
+        // If not prefix is detected in the value, remains the value untouched.
+        if (str_contains($prefixed, ':')) {
+            return $prefixed;
+        }
+
         try {
-            return Assert::nonEmptyString(Assert::in(1, explode(':', $this->sub())));
+            return Assert::nonEmptyString(Assert::in(1, explode(':', $prefixed)));
         } catch (AssertionException $e) {
             throw new MalformedClaimsException($e);
         }

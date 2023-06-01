@@ -44,6 +44,10 @@ class GoogleIapGuard extends RequestGuard
                 $id = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-id'));
                 $email = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-email'));
                 $hd = ($email === null ? null : Assert::nonEmptyString(explode('@', $email)[1])) ?? 'example.com';
+
+                if ($email !== null) {
+                    $email = Claims::trimPrefix($email);
+                }
             } catch (AssertionException $e) {
                 throw new MalformedClaimsException($e);
             }

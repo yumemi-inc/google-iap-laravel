@@ -34,20 +34,20 @@ class GoogleIapGuard extends RequestGuard
      */
     public function callback(): ?Authenticatable
     {
-        if (!\is_string($jwt = $this->request->header('x-goog-iap-jwt-assertion'))) {
-            // Required HTTP header is not provided.
-            return null;
-        }
+        /** @var null|Claims $claims */
+        $claims = null;
 
-        try {
-            $id = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-id'));
-            $email = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-email'));
-            $hd = ($email === null ? null : Assert::nonEmptyString(explode('@', $email)[1])) ?? 'example.com';
-        } catch (AssertionException $e) {
-            throw new MalformedClaimsException($e);
-        }
+        if (\is_string($jwt = $this->request->header('x-goog-iap-jwt-assertion'))) {
+            $claims = $this->googleIdTokenVerifier->verify($jwt);
+        } elseif ($this->options['allow_insecure_headers'] ?? false) {
+            try {
+                $id = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-id'));
+                $email = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-email'));
+                $hd = ($email === null ? null : Assert::nonEmptyString(explode('@', $email)[1])) ?? 'example.com';
+            } catch (AssertionException $e) {
+                throw new MalformedClaimsException($e);
+            }
 
-        if (($this->options['allow_insecure_headers'] ?? false) && ($id !== null || $email !== null)) {
             $claims = new Claims([
                 'exp' => \PHP_INT_MAX,
                 'iat' => 1,
@@ -57,7 +57,9 @@ class GoogleIapGuard extends RequestGuard
                 'sub' => $id ?? 'accounts.google.com:0',
                 'email' => $email ?? 'accounts.google.com:insecure@example.com',
             ]);
-        } elseif (!($claims = $this->googleIdTokenVerifier->verify($jwt)) instanceof Claims) {
+        }
+
+        if (!$claims instanceof Claims) {
             return null;
         }
 

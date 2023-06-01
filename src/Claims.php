@@ -10,7 +10,7 @@ use YumemiInc\GoogleIapLaravel\Internal\AssertionException;
 class Claims
 {
     /**
-     * @var array{
+     * @param array{
      *     exp: positive-int,
      *     iat: positive-int,
      *     aud: non-empty-string,
@@ -18,33 +18,13 @@ class Claims
      *     hd: non-empty-string,
      *     sub: non-empty-string,
      *     email: non-empty-string,
-     * }
+     * } $claims
      *
      * @see https://cloud.google.com/iap/docs/signed-headers-howto#verifying_the_jwt_payload
      */
-    public readonly array $claims;
-
-    /**
-     * @param array<array-key, mixed> $claims
-     *
-     * @throws MalformedClaimsException
-     */
     public function __construct(
-        array $claims,
+        public readonly array $claims,
     ) {
-        try {
-            $this->claims = [
-                'exp' => Assert::positiveInt(Assert::in('exp', $claims)),
-                'iat' => Assert::positiveInt(Assert::in('iat', $claims)),
-                'aud' => Assert::nonEmptyString(Assert::in('aud', $claims)),
-                'iss' => Assert::nonEmptyString(Assert::in('iss', $claims)),
-                'hd' => Assert::nonEmptyString(Assert::in('hd', $claims)),
-                'sub' => Assert::nonEmptyString(Assert::in('sub', $claims)),
-                'email' => Assert::nonEmptyString(Assert::in('email', $claims)),
-            ];
-        } catch (AssertionException $e) {
-            throw new MalformedClaimsException($e);
-        }
     }
 
     /**
@@ -137,6 +117,29 @@ class Claims
     {
         try {
             return Assert::nonEmptyString(Assert::in(1, explode(':', $this->sub())));
+        } catch (AssertionException $e) {
+            throw new MalformedClaimsException($e);
+        }
+    }
+
+    /**
+     * @param array<array-key, mixed> $claims
+     *
+     * @throws MalformedClaimsException
+     */
+    public static function from(
+        array $claims,
+    ): self {
+        try {
+            return new self([
+                'exp' => Assert::positiveInt(Assert::in('exp', $claims)),
+                'iat' => Assert::positiveInt(Assert::in('iat', $claims)),
+                'aud' => Assert::nonEmptyString(Assert::in('aud', $claims)),
+                'iss' => Assert::nonEmptyString(Assert::in('iss', $claims)),
+                'hd' => Assert::nonEmptyString(Assert::in('hd', $claims)),
+                'sub' => Assert::nonEmptyString(Assert::in('sub', $claims)),
+                'email' => Assert::nonEmptyString(Assert::in('email', $claims)),
+            ]);
         } catch (AssertionException $e) {
             throw new MalformedClaimsException($e);
         }

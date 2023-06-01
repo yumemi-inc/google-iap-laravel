@@ -37,7 +37,7 @@ class GoogleIdTokenVerifier
             return null;
         }
 
-        $claims = new Claims($claims);
+        $claims = Claims::from($claims);
 
         if ($this->issuer !== null && $claims->iss() !== $this->issuer) {
             // Issuer verification failed.

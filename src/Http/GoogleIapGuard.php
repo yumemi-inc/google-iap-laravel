@@ -11,14 +11,20 @@ use YumemiInc\GoogleIapLaravel\Claims;
 use YumemiInc\GoogleIapLaravel\DefaultGoogleUserResolver;
 use YumemiInc\GoogleIapLaravel\GoogleIdTokenVerifier;
 use YumemiInc\GoogleIapLaravel\GoogleUserResolver;
+use YumemiInc\GoogleIapLaravel\Internal\Assert;
+use YumemiInc\GoogleIapLaravel\Internal\AssertionException;
 use YumemiInc\GoogleIapLaravel\MalformedClaimsException;
 
 class GoogleIapGuard extends RequestGuard
 {
+    /**
+     * @param array{allow_insecure_headers?: bool} $options
+     */
     public function __construct(
         Request $request,
         private readonly GoogleIdTokenVerifier $googleIdTokenVerifier = new GoogleIdTokenVerifier(),
         private readonly GoogleUserResolver $userProviderAdapter = new DefaultGoogleUserResolver(),
+        private readonly array $options = [],
     ) {
         parent::__construct(static::callback(...), $request);
     }
@@ -33,7 +39,25 @@ class GoogleIapGuard extends RequestGuard
             return null;
         }
 
-        if (!($claims = $this->googleIdTokenVerifier->verify($jwt)) instanceof Claims) {
+        try {
+            $id = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-id'));
+            $email = Assert::nonEmptyStringOrNull($this->request->header('x-goog-authenticated-user-email'));
+            $hd = ($email === null ? null : Assert::nonEmptyString(explode('@', $email)[1])) ?? 'example.com';
+        } catch (AssertionException $e) {
+            throw new MalformedClaimsException($e);
+        }
+
+        if (($this->options['allow_insecure_headers'] ?? false) && ($id !== null || $email !== null)) {
+            $claims = new Claims([
+                'exp' => \PHP_INT_MAX,
+                'iat' => 1,
+                'aud' => 'insecure',
+                'iss' => 'https://cloud.google.com/iap',
+                'hd' => $hd,
+                'sub' => $id ?? 'accounts.google.com:0',
+                'email' => $email ?? 'accounts.google.com:insecure@example.com',
+            ]);
+        } elseif (!($claims = $this->googleIdTokenVerifier->verify($jwt)) instanceof Claims) {
             return null;
         }
 

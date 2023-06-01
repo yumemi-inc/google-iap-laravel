@@ -63,6 +63,20 @@ class Assert
     }
 
     /**
+     * @phpstan-return ($value is non-empty-string ? non-empty-string : ($value is null ? null : never))
+     *
+     * @throws AssertionException
+     */
+    public static function nonEmptyStringOrNull(mixed $value): null|string
+    {
+        try {
+            return self::nonEmptyString($value);
+        } catch (AssertionException) {
+            return self::null($value);
+        }
+    }
+
+    /**
      * @template T
      *
      * @param null|T $value
@@ -78,6 +92,20 @@ class Assert
         }
 
         return $value;
+    }
+
+    /**
+     * @phpstan-return ($value is null ? null : never)
+     *
+     * @throws AssertionException
+     */
+    public static function null(mixed $value): mixed
+    {
+        if ($value !== null) {
+            throw new AssertionException('null', 'non-null value');
+        }
+
+        return null;
     }
 
     /**

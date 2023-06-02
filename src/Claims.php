@@ -15,7 +15,7 @@ class Claims
      *     iat: positive-int,
      *     aud: non-empty-string,
      *     iss: non-empty-string,
-     *     hd: non-empty-string,
+     *     hd: null|non-empty-string,
      *     sub: non-empty-string,
      *     email: non-empty-string,
      * } $claims
@@ -75,9 +75,9 @@ class Claims
      * If an account belongs to a hosted domain, the hd claim is provided to differentiate the domain the account is
      * associated with.
      *
-     * @return non-empty-string
+     * @return null|non-empty-string
      */
-    public function hd(): string
+    public function hd(): ?string
     {
         return $this->claims['hd'];
     }
@@ -155,7 +155,7 @@ class Claims
                 'iat' => Assert::positiveInt(Assert::in('iat', $claims)),
                 'aud' => Assert::nonEmptyString(Assert::in('aud', $claims)),
                 'iss' => Assert::nonEmptyString(Assert::in('iss', $claims)),
-                'hd' => Assert::nonEmptyString(Assert::in('hd', $claims)),
+                'hd' => Assert::nonEmptyStringOrNull($claims['hd'] ?? null),
                 'sub' => Assert::nonEmptyString(Assert::in('sub', $claims)),
                 'email' => Assert::nonEmptyString(Assert::in('email', $claims)),
             ]);

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ee509618ca225f600803faa6e036445",
+    "content-hash": "5ab5c47f953d02be956e1654ba7aae7b",
     "packages": [
         {
             "name": "brick/math",
@@ -1093,36 +1093,47 @@
         },
         {
             "name": "kelvinmo/simplejwt",
-            "version": "v0.7.1",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kelvinmo/simplejwt.git",
-                "reference": "6a6f600dd4b739b9f3068a651dcdd6d41161af9c"
+                "reference": "79b491778e12875aa8adb6c01e64a939a41ea4d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kelvinmo/simplejwt/zipball/6a6f600dd4b739b9f3068a651dcdd6d41161af9c",
-                "reference": "6a6f600dd4b739b9f3068a651dcdd6d41161af9c",
+                "url": "https://api.github.com/repos/kelvinmo/simplejwt/zipball/79b491778e12875aa8adb6c01e64a939a41ea4d3",
+                "reference": "79b491778e12875aa8adb6c01e64a939a41ea4d3",
                 "shasum": ""
             },
             "require": {
                 "ext-gmp": "*",
                 "ext-hash": "*",
                 "ext-openssl": "*",
-                "php": "^7.1 || ^8.0",
-                "symfony/console": "^4.0 || ^5.0 || ^6.0"
+                "php": "^7.2 || ^8.0",
+                "symfony/console": "^5.0 || ^6.0"
             },
             "require-dev": {
-                "consolidation/robo": "^3.0",
+                "bamarni/composer-bin-plugin": "^1.8",
+                "consolidation/robo": "^3.0 || ^4.0",
                 "ext-bz2": "*",
                 "ext-phar": "*",
                 "phpstan/phpstan": "^1.3.0",
-                "phpunit/phpunit": "^7.0 || ^9.3"
+                "phpunit/phpunit": "^8.0 || ^9.3 || ^10.0"
+            },
+            "suggest": {
+                "ext-sodium": "Provides support for OKP (X25519/Ed25519) keys"
             },
             "bin": [
                 "bin/jwkstool"
             ],
             "type": "library",
+            "extra": {
+                "bamarni-bin": {
+                    "bin-links": false,
+                    "target-directory": "vendor-bin",
+                    "forward-command": false
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "SimpleJWT\\": "src/SimpleJWT"
@@ -1147,9 +1158,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kelvinmo/simplejwt/issues",
-                "source": "https://github.com/kelvinmo/simplejwt/tree/v0.7.1"
+                "source": "https://github.com/kelvinmo/simplejwt/tree/v0.8.0"
             },
-            "time": "2023-08-13T03:56:51+00:00"
+            "time": "2023-09-17T21:59:51+00:00"
         },
         {
             "name": "laravel/framework",

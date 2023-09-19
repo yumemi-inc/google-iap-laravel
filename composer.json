@@ -18,7 +18,7 @@
         "illuminate/contracts": "^9|^10|^11",
         "illuminate/http": "^9|^10|^11",
         "illuminate/support": "^9|^10|^11",
-        "kelvinmo/simplejwt": "~0.7.0",
+        "kelvinmo/simplejwt": "~0.7.0 || ~0.8.0",
         "symfony/cache": "^6.2"
     },
     "require-dev": {

@@ -1168,16 +1168,16 @@
         },
         {
             "name": "kelvinmo/simplejwt",
-            "version": "v0.8.0",
+            "version": "v0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kelvinmo/simplejwt.git",
-                "reference": "79b491778e12875aa8adb6c01e64a939a41ea4d3"
+                "reference": "8bbfcfc02c342f75edf40327d663a08a898324f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kelvinmo/simplejwt/zipball/79b491778e12875aa8adb6c01e64a939a41ea4d3",
-                "reference": "79b491778e12875aa8adb6c01e64a939a41ea4d3",
+                "url": "https://api.github.com/repos/kelvinmo/simplejwt/zipball/8bbfcfc02c342f75edf40327d663a08a898324f5",
+                "reference": "8bbfcfc02c342f75edf40327d663a08a898324f5",
                 "shasum": ""
             },
             "require": {
@@ -1233,9 +1233,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kelvinmo/simplejwt/issues",
-                "source": "https://github.com/kelvinmo/simplejwt/tree/v0.8.0"
+                "source": "https://github.com/kelvinmo/simplejwt/tree/v0.8.1"
             },
-            "time": "2023-09-17T21:59:51+00:00"
+            "time": "2023-12-13T09:03:23+00:00"
         },
         {
             "name": "laravel/framework",

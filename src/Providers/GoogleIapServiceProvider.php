@@ -34,7 +34,7 @@ class GoogleIapServiceProvider extends ServiceProvider
     {
         $auth->extend(
             'google-iap',
-            function (Container $app, string $name, array $config) use ($auth): GoogleIapGuard {
+            static function (Container $app, string $name, array $config) use ($auth): GoogleIapGuard {
                 $guard = new GoogleIapGuard(
                     $app->make('request'),
                     $app->make(GoogleIdTokenVerifier::class),

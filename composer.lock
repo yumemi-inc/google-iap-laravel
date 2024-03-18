@@ -1168,16 +1168,16 @@
         },
         {
             "name": "kelvinmo/simplejwt",
-            "version": "v0.8.1",
+            "version": "v0.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kelvinmo/simplejwt.git",
-                "reference": "8bbfcfc02c342f75edf40327d663a08a898324f5"
+                "reference": "784779644c499c9b9d6746639b2b382dba542f14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kelvinmo/simplejwt/zipball/8bbfcfc02c342f75edf40327d663a08a898324f5",
-                "reference": "8bbfcfc02c342f75edf40327d663a08a898324f5",
+                "url": "https://api.github.com/repos/kelvinmo/simplejwt/zipball/784779644c499c9b9d6746639b2b382dba542f14",
+                "reference": "784779644c499c9b9d6746639b2b382dba542f14",
                 "shasum": ""
             },
             "require": {
@@ -1185,7 +1185,7 @@
                 "ext-hash": "*",
                 "ext-openssl": "*",
                 "php": "^7.2 || ^8.0",
-                "symfony/console": "^5.0 || ^6.0"
+                "symfony/console": "^5.0 || ^6.0 || ^7.0"
             },
             "require-dev": {
                 "bamarni/composer-bin-plugin": "^1.8",
@@ -1233,9 +1233,9 @@
             ],
             "support": {
                 "issues": "https://github.com/kelvinmo/simplejwt/issues",
-                "source": "https://github.com/kelvinmo/simplejwt/tree/v0.8.1"
+                "source": "https://github.com/kelvinmo/simplejwt/tree/v0.8.2"
             },
-            "time": "2023-12-13T09:03:23+00:00"
+            "time": "2024-03-15T03:19:34+00:00"
         },
         {
             "name": "laravel/framework",
@@ -9594,9 +9594,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "kelvinmo/simplejwt": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
